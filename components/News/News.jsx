@@ -9,8 +9,6 @@ import format from "date-fns/format";
 const News = () => {
   const [photos, setPhotos] = useState([]);
   const [currentId, setCurrentId] = useState(0);
-  const [ind, setInd] = useState(0);
-  console.log(currentId);
 
   const getPhotos = async () => {
     await axios
@@ -32,7 +30,6 @@ const News = () => {
 
   const currentSlide = (slide) => {
     setCurrentId(slide.realIndex);
-    setInd(slide.realIndex);
   };
 
   return (
@@ -46,9 +43,11 @@ const News = () => {
         </div>
         <Swiper
           effect={"coverflow"}
+          onSlideChange={currentSlide}
           navigation={true}
           grabCursor={true}
           centeredSlides={true}
+          initialSlide={0}
           coverflowEffect={{
             rotate: 50,
             stretch: 0,
@@ -59,14 +58,14 @@ const News = () => {
           loop={true}
           slidesPerView={3}
           pagination={true}
-          onSlideChange={currentSlide}
+          
           breakpoints={{
             0: {
               slidesPerView: 1,
               effect: "slide",
             },
             600: {
-              slidesPerView: 1,
+              slidesPerView: 3,
               effect: "coverflow",
             },
             960: {

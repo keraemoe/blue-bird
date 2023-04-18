@@ -3,17 +3,6 @@
   height: auto !important;
 }
 
-.sliderNews .swiper-wrapper{
-  position: relative;
-}
-
-.sliderNews .swiper-slide {
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .sliderNews .swiper-slide img {
   display: block;
   width: 100%;

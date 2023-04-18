@@ -42,10 +42,6 @@
   height: 67%;
 }
 
-.sliderNews{
-  height: 100vh !important;
-}
-
 .sliderNews .swiper-pagination-bullets{
   bottom: 150px !important;
 }
