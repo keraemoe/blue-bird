@@ -8,6 +8,10 @@ import format from "date-fns/format";
 
 const News = () => {
   const [photos, setPhotos] = useState([]);
+  const [currentId, setCurrentId] = useState(0);
+  const [ind, setInd] = useState(0);
+  console.log(currentId);
+
   const getPhotos = async () => {
     await axios
       .get("https://durawka69.pythonanywhere.com/api/posts/")
@@ -18,14 +22,18 @@ const News = () => {
   }, []);
 
   const formatDate = (date) => {
-    return format(new Date(date), "dd.MM.yyyy")
-  }
+    return format(new Date(date), "dd.MM.yyyy");
+  };
 
-  const formattedDates = photos.map(photo => ({
+  const formattedDates = photos.map((photo) => ({
     ...photo,
-    formattedDate: formatDate(photo.date)
-  }))
+    formattedDate: formatDate(photo.date),
+  }));
 
+  const currentSlide = (slide) => {
+    setCurrentId(slide.realIndex);
+    setInd(slide.realIndex);
+  };
 
   return (
     <div id="news" className={s.news_main}>
@@ -51,7 +59,7 @@ const News = () => {
           loop={true}
           slidesPerView={3}
           pagination={true}
-          initialSlide={1}
+          onSlideChange={currentSlide}
           breakpoints={{
             0: {
               slidesPerView: 1,
@@ -79,21 +87,26 @@ const News = () => {
                   src={photo.img}
                   alt="image"
                 />
-                <div className={s.slide_content}>
-                  <h2>{photo.title}</h2>
-                  <p>{photo.content}</p>
-                  <h3>Дата создания анонса: {photo.formattedDate}</h3>
-                  <button>
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc9Vx8XcU5DKWSfCUtFy9i1gsRvTTjUHRM5coY7sSCTBvNwtQ/viewform?usp=sharing">
-                      Принять участие
-                    </a>
-                  </button>
-                </div>
-                <div className={s.slide_content_opacity}></div>
               </SwiperSlide>
             );
           })}
         </Swiper>
+        <div>
+          {formattedDates.map((item, id) => {
+            return (
+              <div style={{display: currentId === id ? 'flex' : 'none'}} className={s.slide_content}>
+                <h2>{item.title}</h2>
+                <p>{item.content}</p>
+                <h3>Дата создания анонса: {item.formattedDate}</h3>
+                <button>
+                  <a href="https://docs.google.com/forms/d/e/1FAIpQLSc9Vx8XcU5DKWSfCUtFy9i1gsRvTTjUHRM5coY7sSCTBvNwtQ/viewform?usp=sharing">
+                    Принять участие
+                  </a>
+                </button>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

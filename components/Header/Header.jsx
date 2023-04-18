@@ -61,7 +61,7 @@ const Header = () => {
                   color: styleText.white
                 }}
               >
-                Новости
+                Галерея
               </a>
             </li>
             <li>

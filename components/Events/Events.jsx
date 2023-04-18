@@ -7,7 +7,7 @@ const Events = () => {
         <>
             <div id='events' className={s.events}>
                 <h1>
-                    НОВОСТИ
+                    ГАЛЕРЕЯ
                     <hr />
                 </h1>
             </div>
